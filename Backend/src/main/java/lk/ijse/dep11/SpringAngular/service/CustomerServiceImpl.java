@@ -4,6 +4,7 @@ import lk.ijse.dep11.SpringAngular.model.Customer;
 import lk.ijse.dep11.SpringAngular.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,6 +25,15 @@ public class CustomerServiceImpl implements CustomerService{
         if(existingCustomer.isPresent()){
             throw new RuntimeException("Customer with ID " + customer.getId() +  " already exists");
         }
+        //Check contact number is unique
+        if(customerRepository.findByContact(customer.getContact()).isPresent()){
+            throw new RuntimeException("Customer with ID " + customer.getContact() +  " already exists");
+        }
         return customerRepository.save(customer);
+    }
+
+    @Override
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
     }
 }

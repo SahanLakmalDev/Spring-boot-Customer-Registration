@@ -20,7 +20,7 @@ public class Customer implements Serializable {
     private String name;
     @Column(nullable = false, length = 300)
     private String address;
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 20, unique = true)
     private String contact;
 
 }

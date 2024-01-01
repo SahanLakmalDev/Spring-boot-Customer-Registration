@@ -5,6 +5,8 @@ import lk.ijse.dep11.SpringAngular.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/v1/customers")
@@ -25,5 +27,10 @@ public class CustomerController {
         return savedCustomer;
     }
 
+    //Get all the customers
+    @GetMapping(produces = "application/json")
+    public List<Customer> getAllCustomers(){
+        return customerService.getAllCustomers();
+    }
 
 }
