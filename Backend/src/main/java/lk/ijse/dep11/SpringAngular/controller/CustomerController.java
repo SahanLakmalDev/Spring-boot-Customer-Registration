@@ -33,4 +33,11 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
+    //Update the customer
+    @PatchMapping(value = "/{id}", consumes = "application/json")
+    public void updateCustomer(@PathVariable String id, @RequestBody Customer customer){
+        customerService.updateCustomer(id, customer);
+    }
+
+
 }
