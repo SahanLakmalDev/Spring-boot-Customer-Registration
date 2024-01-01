@@ -1,1 +1,83 @@
-<p>customer works!</p>
+
+<div class="container mt-5">
+    <div>
+        <h1>Customer Registration</h1>
+    </div>
+
+    <form (submit)="addCustomer()">
+        <div class="mb-3">
+            <label for="id" class="form-label">ID</label>
+            <input type="text" class="form-control"
+            id="id"
+            name="customer_id"
+            [(ngModel)]="newCustomer.id"
+            required
+            pattern="^C\\d+$"
+            minlength="4"
+            >
+            <!-- <div *ngIf="customerForm.controls['customer_id']?.hasError('required')">
+                ID is required.
+            </div>
+            <div *ngIf="customerForm.controls['customer_id']?.hasError('minlength')">
+                ID must be at least 4 characters long.
+            </div>
+              <div *ngIf="customerForm.controls['customer_id']?.hasError('pattern')">
+                ID should start with 'C' followed by numbers (e.g., C001).
+            </div> -->
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" 
+            name="customer_name"
+            [(ngModel)]="newCustomer.name" required>
+        </div>
+        <div class="mb-3">
+            <label for="id" class="form-label">ADDRESS</label>
+            <input type="text" class="form-control"
+            id="address"
+            name="customer_address"
+            [(ngModel)]="newCustomer.address"
+            required
+            >
+        </div>
+        <div class="mb-3">
+            <label for="id" class="form-label">CONTACT</label>
+            <input type="text" class="form-control"
+            id="contact"
+            name="customer_contact"
+            [(ngModel)]="newCustomer.contact"
+            required
+            >
+        </div>
+        <button type="submit" class="btn btn-primary">{{ editingCustomer ? 'Update' : 'Add' }}</button>
+    </form>
+    
+    <!--Customer Table-->
+    <h3>Customer Table</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (customer of customers; track customer.id) {
+                <tr>
+                    <td>{{customer.id}}</td>
+                    <td>{{customer.name}}</td>
+                    <td>{{customer.address}}</td>
+                    <td>{{customer.contact}}</td>
+
+                    <td>
+                        <button class="btn btn-warning btn-sm mx-2" (click)="editCustomer(customer)">Edit</button>
+                        <button class="btn btn-danger btn-sm" (click)="deleteCustomer(customer)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
