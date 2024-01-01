@@ -65,4 +65,16 @@ public class CustomerServiceImpl implements CustomerService{
 
 
     }
+
+    @Override
+    public void deleteCustomer(String id) {
+        //Check if the customer is exists
+        Optional<Customer> existingCustomer = customerRepository.findById(id);
+
+        if(existingCustomer.isEmpty()){
+            throw new RuntimeException("Customer with ID " + id + " not found");
+        }
+        customerRepository.deleteById(id);
+
+    }
 }
